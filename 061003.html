@@ -30,7 +30,7 @@
                 // 키 : 키값 name : "홍길동", age : 20
                 x : Math.random()*canvas.width,
                 y : Math.random()*canvas.height,
-                r : Math.random()*80,
+                r : 50 + Math.random()*80,
                 speedX : -3 + Math.random()*8,
                 speedY : -3 + Math.random()*8,
                 color : `hsl(${Math.random()*360}, 80%, 60%)`
@@ -39,11 +39,25 @@
         }
         
 
+        let raGs = []
+
+        for(let i = 0; i < 10; i++){
+            raGs.push({
+                firstcolor : `hsl(${Math.random()*360}, 60%, 80%)`,
+                secondcolor : `hsl(${Math.random()*360}, 70%, 50%)`,
+                thirdcolor : `hsl(${Math.random()*360}, 80%, 20%)`
+            })
+        }
         function ani(){
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             for(let i = 0; i < circles.length; i++){
                 // 원의 정보 가져오기
                 let circle = circles[i]
+                let raGcolor = raGs[i]
+                let raG = ctx.createRadialGradient(circle.x-30, circle.y-30, circle.r-50, circle.x-10, circle.y-10, circle.r-10)
+                raG.addColorStop(0, raGcolor.firstcolor)
+                raG.addColorStop(0.5, raGcolor.secondcolor)
+                raG.addColorStop(1, raGcolor.thirdcolor)
 
                 // 좌표 변경
                 circle.x += circle.speedX
@@ -62,7 +76,7 @@
                 // 원 그리기
                 ctx.beginPath()
                 ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2)
-                ctx.fillStyle = circle.color
+                ctx.fillStyle = raG
                 ctx.fill()
                 
                 canvas.style.backgroundColor = backcolor
