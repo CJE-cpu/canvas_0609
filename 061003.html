@@ -43,9 +43,8 @@
 
         for(let i = 0; i < 10; i++){
             raGs.push({
-                firstcolor : `hsl(${Math.random()*360}, 60%, 80%)`,
-                secondcolor : `hsl(${Math.random()*360}, 70%, 50%)`,
-                thirdcolor : `hsl(${Math.random()*360}, 80%, 20%)`
+                firstcolor : `hsl(${Math.random()*360}, 30%, 90%)`,
+                secondcolor : `hsl(${Math.random()*360}, 50%, 70%)`,
             })
         }
         function ani(){
@@ -54,10 +53,9 @@
                 // 원의 정보 가져오기
                 let circle = circles[i]
                 let raGcolor = raGs[i]
-                let raG = ctx.createRadialGradient(circle.x-30, circle.y-30, circle.r-50, circle.x-10, circle.y-10, circle.r-10)
+                let raG = ctx.createRadialGradient(circle.x-20, circle.y-20, circle.r-50, circle.x-10, circle.y-10, circle.r)
                 raG.addColorStop(0, raGcolor.firstcolor)
-                raG.addColorStop(0.5, raGcolor.secondcolor)
-                raG.addColorStop(1, raGcolor.thirdcolor)
+                raG.addColorStop(1, raGcolor.secondcolor)
 
                 // 좌표 변경
                 circle.x += circle.speedX
